@@ -1,0 +1,9 @@
+#!/usr/bin/env fish
+
+function t
+    set binary "twd"
+    set target ($binary $argv 3>&1 >/dev/tty)
+    if test -n "$target" -a -d "$target"
+        cd "$target"
+    end
+end

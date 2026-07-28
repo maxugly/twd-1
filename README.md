@@ -22,7 +22,9 @@ pip install twd-m4sc0
 
 ## Setup
 
-To actually change directories (rather than just print paths), add this function to your `~/.bashrc` or `~/.zshrc`:
+To actually change directories (rather than just print paths), add this function to your shell configuration.
+
+**For Bash / Zsh** (add to `~/.bashrc` or `~/.zshrc`):
 
 ```bash
 t () {
@@ -32,6 +34,18 @@ t () {
     cd "$target"
   fi
 }
+```
+
+**For Fish** (add to `~/.config/fish/functions/t.fish`):
+
+```fish
+function t
+    set binary "twd"
+    set target ($binary $argv 3>&1 >/dev/tty)
+    if test -n "$target" -a -d "$target"
+        cd "$target"
+    end
+end
 ```
 
 The tool can work without this setup, but you'll only get path output instead of directory changes. This also allows for a quicker launch — instead of having to type `twd` over and over you can start it with just `t` (might conflict with other programs or functions).
